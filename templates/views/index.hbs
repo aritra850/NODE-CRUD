@@ -1,0 +1,97 @@
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MyPage</title>
+    <style>
+      body { background-color: black; color: gold; text-align: center } #form {
+      background-color: rgba(66, 53, 53, 0.7); box-shadow: 2px 2px 10px white;
+      width: 70%; height: 500px; padding: 20px; margin: auto; text-align: center
+      } input { width: 80%; height: 50px; margin: auto; text-align: center }
+      button { width: 30%; background-color: gold; color: white; border: none;
+      border-radius: 10px; height: 50px; padding: 10px, margin:auto; cursor:
+      pointer; } button:hover { background-color: gray; box-shadow: 2px 2px 10px
+      gold; color: gold; } .msg { color: red; }#link{color:white}#link:hover{color:gold}
+    </style>
+
+  </head>
+
+  <body>
+    <h1>REGISTRATION FORM</h1>
+    <form action="/" method="POST" id="form" onsubmit="return submitEvent()">
+      <input type="text" id="name" name="name" placeholder="NAME" /><br /><u
+        id="nameu"
+        class="msg"
+      ></u><br /><br />
+      <input type="email" id="email" name="email" placeholder="EMAIL" /><br /><u
+        id="emailu"
+        class="msg"
+      ></u><br /><br />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="PASSWORD"
+      /><br /><u id="passu" class="msg"></u><br /><br />
+      <input
+        type="password"
+        id="cpassword"
+        name="cpassword"
+        placeholder="CONFIRM PASSWORD"
+      /><br /><u id="cpassu" class="msg"></u><br /><br />
+      <button type="submit">REGISTER</button><br /><br /><br />
+      <a id="link" href="/login">Go To Login Page</a><br />
+    </form>
+    
+    <script>
+      let submitEvent = () => { 
+        let name = document.getElementById("name").value; 
+        let email = document.getElementById("email").value; 
+        let password = document.getElementById("password").value; 
+        let cpassword = document.getElementById("cpassword").value; 
+        
+        let namep = /^[A-Za-z ]{3,}$/; 
+        let emailp = /^[A-Za-z0-9._]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z.]{2,6}$/; 
+        let flag = true;
+
+        if (!namep.test(name) && name.charAt(0)!=' ') { 
+          flag = false;
+          document.getElementById("nameu").innerHTML = "** INVALID ENTRY"; 
+        } else if(flag) { 
+          document.getElementById("nameu").innerHTML = ""; 
+        }
+        
+        if(!emailp.test(email)) { 
+          flag = false;
+          document.getElementById("emailu").innerHTML = "** INVALID Email"; 
+        } else if (flag) { 
+          document.getElementById("emailu").innerHTML = ""; 
+        }
+        
+        if(password.length<8) { 
+          flag = false;
+          document.getElementById("passwordu").innerHTML = "** PASSWORD TOO SMALL"; 
+        } else if(flag){ 
+          document.getElementById("passwordu").innerHTML =""; 
+        } 
+        
+        if (cpassword.length<8) { 
+          flag = false;
+          document.getElementById("cpasswordu").innerHTML = "** PASSWORD TOO SMALL";
+        } else if(flag){
+          document.getElementById("cpasswordu").innerHTML = ""; 
+        } 
+        
+        if(password.localeCompare(cpassword) != 0) { 
+          flag = false; 
+          alert("PASSWORD AND CONFIRM PASSWORD SHOULD BE SAME"); 
+        } 
+        return flag; 
+    }
+    </script>
+  </body>
+
+</html>

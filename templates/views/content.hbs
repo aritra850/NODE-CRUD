@@ -1,0 +1,189 @@
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MyPage</title>
+    <style>
+      body 
+      {
+         background-color: black; 
+         color: gold; 
+         text-align: center;
+      } 
+      a{
+        text-decoration:none;
+        color:gold;
+      }
+      button,#save{
+        padding:5px;
+        background-color:black;
+        color:gold;
+        margin:auto;
+        cursor:pointer;
+        border-radius:10px;
+      }
+      #save,#logout{
+        padding:5px;
+        border-radius:10px;
+      }
+      button:hover,#save:hover{
+        background-color:white;
+        border:none;
+        box-shadow:2px 2px 10px gold;
+      }
+      u{
+        color:cyan;
+      }
+      #heading{
+        display:flex;
+        justify-content:space-between;
+        margin:auto;
+        width:80%;
+        height:fit-content;
+      }
+      #logout{
+        margin-right:0px;
+      }
+      #container{
+        width:80%;
+        height:fit-content;
+        margin:10px auto;
+      }
+      #form{
+        width:100%;
+        height:fit-content;
+        border:none;
+        box-shadow:2px 2px 10px white;
+        background-color:transparent;
+        padding:10px;
+      }
+      #title,#note{
+        width:80%;
+        height:50px;
+        margin:10px auto;
+      }
+      #note{
+        height:200px;
+      }
+      #hide{
+        display:none;
+      }
+      .edit{
+        padding:5px;
+        background-color:blue;
+        color:white;
+        margin:10px;
+        border:none;
+        border-radius:10px;
+        font-size:auto;
+      }
+      .edit:hover{
+        background-color:white;
+        color:blue;
+        box-shadow:2px 2px 10px blue;
+      }
+      .delete{
+        padding:5px;
+        background-color:red;
+        color:white;
+        margin:10px;
+        border:none;
+        border-radius:10px;
+        font-size:auto;
+      }
+      .delete:hover{
+        background-color:white;
+        color:red;
+        box-shadow:2px 2px 10px red;
+      }
+      #action{
+        display:flex;
+        justify-content:space-around;
+      }
+      #table{
+        margin:auto;
+        padding:10px;
+        display:none;
+        width:100%;
+        height:fit-content;
+        text-align:center;
+      }
+      .thead{
+        width:40%;
+        height:50px;
+        margin:auto;
+        padding:20px;
+        color:cyan;
+        border:2px solid cyan;
+      }
+      .notes{
+        width:40%;
+        height:fit-content;
+        border:2px solid gold;
+        padding:20px;
+        color:white;
+      }
+      #table-body{
+        width:100%;
+        height:fit-content;
+        margin:auto;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="heading">
+      <h1>WELCOME <u>{{userid}}</u></h1>
+      <button id="logout"><a href="/logout/{{id}}">LOGOUT</a></button>
+    </div>
+    <div id="container">
+      <form action="/content/{{email}}" method="post" id="form">
+        <input type="text" id="title" name="title" placeholder="TITLE OF NOTE">
+        <textarea name="note" id="note" placeholder="WRITE YOUR NOTE HERE"></textarea><br>
+        <input type="submit" id="save" value="SAVE NOTE">
+      </form>
+      <button id="show" class="act" onclick="showbtn()">SHOW NOTE</button>
+      <button id="hide" class="act" onclick="hidebtn()">HIDE NOTE</button><br>
+      <table id="table">
+        <div id="table-body">
+          <tr>
+            <td class="thead">TITLE</td>
+            <td class="thead">NOTE</td>
+            <td class="thead">ACTIONS</td>
+          </tr>
+        
+          {{#each notes}}
+            <tr class="tbody">
+              <td class="notes">{{this.title}}</td>
+              <td class="notes">{{this.note}}</td>
+              <td class="notes">
+                <div id="action">
+                  <button class="edit"><a href="/content/edit/{{this._id}}/{{email}}/{{id}}">EDIT</a></button>
+                  <button class="delete"><a href="/content/delete/{{this._id}}/{{email}}">DELETE</a></button>
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+        </div>
+      </table>
+    </div>
+    
+    <script>
+      const showbtn = () =>{
+        document.getElementById("show").style="display:none";
+        document.getElementById("hide").style="display:block";
+        document.getElementById("table").style="display:block";
+      }
+      const hidebtn = () =>{
+        document.getElementById("show").style="display:block";
+        document.getElementById("hide").style="display:none";
+        document.getElementById("table").style="display:none";
+      }
+    </script>
+  </body>
+
+</html>
